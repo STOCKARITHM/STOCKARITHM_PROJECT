@@ -1,5 +1,5 @@
 // InsertionSort to be used within bucket sort
-<script language = "JavaScript">
+//testing this committ 
 
 function insertionSort(array) {
   var length = array.length;
