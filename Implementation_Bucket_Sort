@@ -62,4 +62,8 @@ function bucketSort(array, bucketSize) {
   return array;
 }
 
+var sort_copy = [];
+sort_sopy = copy(storage);
+
+
 </script>
