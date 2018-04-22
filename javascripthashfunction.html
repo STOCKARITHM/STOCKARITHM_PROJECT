@@ -101,7 +101,7 @@
   </head>
 
   <body>
-        <script language = "JavaScript">
+<script language = "JavaScript">
 var max = 1000;
 var hash = (string, max) => {
   var hash = 0;
@@ -135,12 +135,9 @@ let HashTable = function() {
        {
         document.write(storage[i]);
         document.write("<br>");
-
-      }
+	   }
     }
-
-    
-  }
+   }
 
 //adds the stock symbol and value to hash table, will need to be altered for more datapoints per symbol
   thisHash.add = function(key) {	
@@ -260,10 +257,10 @@ let HashTable = function() {
            if (xmlhttp.readyState == 4) {                   
              var lines = xmlhttp.responseText;    //*here we get all lines from text file*
 
-            var lineArr = lines.split('\n');     //here we call function with parameter "lines*"
+            var lineArr = lines.split(',');     //here we call function with parameter "lines*"
           	for (var i = 0; i < lineArr.length; i++) {
-          	thisHash.add(lineArr[i]);
-          }
+          		thisHash.add(lineArr[i]);
+          		}
            }               
        }
 
