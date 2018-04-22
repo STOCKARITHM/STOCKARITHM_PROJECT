@@ -1,0 +1,40 @@
+				<script type="text/javascript">
+function copy(o)
+{
+	var counter = 0;
+	var counting = 0;
+	var v,key;
+	var output = [];
+	output = Array.isArray(o) ? []: {};
+	for(key in o) 
+	{
+		if(o[key]!=undefined)
+		{
+			for(var x = 0; x <o[key].length; x++)
+			{
+				v="";
+				// quantifier to skip the inclusion of the element
+				// if(o[key][x][4] == 0)
+				// {
+				// 	continue;
+				// }
+				for(var y= 0; y< o[key][x].length; y++)
+				{
+				v = o[key][x][y];
+				//document.write(v);
+				//document.write("<br>");
+
+				output[counter] = (typeof v === "object") ? copy(v) : v;	
+				counter ++;	
+				
+				}
+
+				
+			}
+	
+		}
+	}
+	return output;
+}
+
+</script>
