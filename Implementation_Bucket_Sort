@@ -1,6 +1,14 @@
 // InsertionSort to be used within bucket sort
 //testing this committ 
 <script language = "JavaScript">
+
+//copy the storage array holding stock info into a new array to sort
+var copy_array=[];
+copy_array = copy(storage);
+
+//sort the array
+bucketSort(copy_array, 500);
+
 function insertionSort(array) {
   var length = array.length;
   
@@ -62,8 +70,6 @@ function bucketSort(array, bucketSize) {
   return array;
 }
 
-var sort_copy = [];
-sort_sopy = copy(storage);
 
 
 </script>
