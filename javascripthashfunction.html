@@ -35,8 +35,7 @@
       height: 10%;
       box-sizing: border-box;
       padding: .5em;
-      test-align: center;
-
+      text-align: center;
     }
     #Index2
     {
@@ -58,7 +57,6 @@
     }
     #Index4
     {
-
       float: left;
       width: 15%;
       background: white;
@@ -68,7 +66,6 @@
     }
     #ShowSelectedStates
     {
-
       float: left;
       width: 15%;
       background: white;
@@ -86,7 +83,6 @@
      box-sizing: border-box;
      padding: 0.5em;
     }
-
     #right
     {
      float: left;
@@ -103,6 +99,8 @@
   <body>
 <script language = "JavaScript">
 var max = 1000;
+var dimplus =0;
+var dimcounter = 0;
 var hash = (string, max) => {
   var hash = 0;
   for (var i = 0; i < string.length; i++) {
@@ -110,59 +108,93 @@ var hash = (string, max) => {
   }
   return hash % max;
 };
-
 var getURL = (string) => {
-	var str1 = "https://api.iextrading.com/1.0/stock/";
-	var str2 = "/chart/1y";
-	var fullString = str1.concat(string, str2);
-	return fullString; 
+  var str1 = "https://api.iextrading.com/1.0/stock/";
+  var str2 = "/chart/1y";
+  var fullString = str1.concat(string, str2);
+  return fullString; 
 };
-
-
 let HashTable = function() {
-
   let storage = [];
+  let twodim = [];
+  
   const max = 1000;
   var thisHash = this;
-
   //currently prints all hash indexes that are defined
       //this function needs to be changed/have several versions to benefit us
-
   thisHash.print = function() {
-    for(var i = 0; i< max; i++)
+    for(var i = 0; i< twodim.length; i++)
     {
+      document.write(twodim[i]);
+      document.write("<br>");
        if(storage[i]!=undefined)
-       {
-        document.write(storage[i]);
-        document.write("<br>");
-	   }
+        {
+       // document.write(storage[i]);
+        //document.write("<br>");
+        }
     }
    }
-
 //adds the stock symbol and value to hash table, will need to be altered for more datapoints per symbol
-  thisHash.add = function(key) {	
+
+  thisHash.add = function(key) {  
   var value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12;
+  dimcounter = 0;
   $.ajax({
   url: getURL(key),
   async: false,
   dataType: 'json',
   success: function (json) {
-  	var n = Math.floor(json.length / 11);
-  	value1 = json[0].close;
-  	value2 = json[n].close;
-  	value3 = json[2*n].close;
-  	value4 = json[3*n].close;
-  	value5 = json[4*n].close;
-  	value6 = json[5*n].close;
-  	value7 = json[6*n].close;
-  	value8 = json[7*n].close;
-  	value9 = json[8*n].close;
-  	value10 = json[9*n].close;
-  	value11 = json[10*n].close;
-  	value12 = json[json.length - 1].close;	
+    var n = Math.floor(json.length / 11);
+    value1 = json[0].close;
+    value2 = json[n].close;
+    value3 = json[2*n].close;
+    value4 = json[3*n].close;
+    value5 = json[4*n].close;
+    value6 = json[5*n].close;
+    value7 = json[6*n].close;
+    value8 = json[7*n].close;
+    value9 = json[8*n].close;
+    value10 = json[9*n].close;
+    value11 = json[10*n].close;
+    value12 = json[json.length - 1].close;  
+    let onedim = new Array();
+    onedim[dimcounter] = key;
+    dimcounter++;
+    onedim[dimcounter] = value1;
+    dimcounter ++;
+    onedim[dimcounter] = value2;
+    dimcounter ++;
+    onedim[dimcounter] = value3;
+    dimcounter ++;
+    onedim[dimcounter] = value4;
+    dimcounter ++;
+    onedim[dimcounter] = value5;
+    dimcounter ++;
+    onedim[dimcounter] = value6;
+    dimcounter ++;
+    onedim[dimcounter] = value7;
+    dimcounter ++;
+    onedim[dimcounter] = value8;
+    dimcounter ++;
+    onedim[dimcounter] = value9;
+    dimcounter ++;
+    onedim[dimcounter] = value10;
+    dimcounter ++;
+    onedim[dimcounter] = value11;
+    dimcounter ++;
+    onedim[dimcounter] = value12;
+    dimcounter ++;
+
+    twodim[dimplus] = onedim;
+    dimplus ++;
+
+
+
+
+
   }
 });
- 
+
     var index = hash(key, max);
     if (storage[index] === undefined) {
       storage[index] = [
@@ -205,7 +237,6 @@ let HashTable = function() {
       }
     }
   };
-
 //prints the stock symbol and the value
   thisHash.printinfo = function(key)
   {
@@ -227,8 +258,6 @@ let HashTable = function() {
       }
     }
   }
-
-
   //returns the value of the stock ($)
   thisHash.lookup = function(key) {
     var index = hash(key, max);
@@ -242,38 +271,29 @@ let HashTable = function() {
       }
     }
   };
-
-	thisHash.getData = function() {       //this will read file and send information to other function
+  thisHash.getData = function() {       //this will read file and send information to other function
        var xmlhttp;
-
        if (window.XMLHttpRequest) {
            xmlhttp = new XMLHttpRequest();               
        }           
        else {               
            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");               
        }
-
        xmlhttp.onreadystatechange = function () {               
            if (xmlhttp.readyState == 4) {                   
              var lines = xmlhttp.responseText;    //*here we get all lines from text file*
-
             var lineArr = lines.split(',');     //here we call function with parameter "lines*"
-          	for (var i = 0; i < lineArr.length; i++) {
-          		thisHash.add(lineArr[i]);
-          		}
+            for (var i = 0; i < lineArr.length; i++) {
+              thisHash.add(lineArr[i]);
+              }
            }               
        }
-
        xmlhttp.open("GET", "./symbols.txt", false);
        xmlhttp.send();    
-	};
+  };
 };
-
-
 let ht = new HashTable();
-
-	ht.getData();
-
+  ht.getData();
         </script>
 
     <div id = "header">
@@ -289,10 +309,8 @@ let ht = new HashTable();
                   
                   //prints whole hash
                   ht.print();
-
                   //prints just info of stock "KEY"
                   //ht.printinfo("KEY");
-
         </script>
 
       </div>
