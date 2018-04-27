@@ -1,44 +1,21 @@
+<html>
+
+  <head>
+    <title>Stockarithm</title>
+    <style type='text/css'>
+        
+    </style>
+  </head>
+
+  <body>
+
+
+
 // InsertionSort to be used within bucket sort
 //testing this committ 
 <script language = "JavaScript">
 
-//copy the storage array holding stock info into a new array to sort
-var copy_array=[];
-copy_array = copy(storage);
 
-//sort the array
-bucketSort(copy_array, 500);
-
-function insertionSort(array) {
-  var length = array.length;
-  
-  for(var i = 1; i < length; i++) {
-    var temp = array[i];
-    for(var j = i - 1; j >= 0 && array[j] > temp; j--) {
-      array[j+1] = array[j];
-    }
-    array[j+1] = temp;
-  }
-  
-  return array;
-}
-
-//new insertion sort in Java, needs to be altered for our needs
-private static void sort(int[][] a, int n, int c) {
-    int key, j;
-    for (int i = 1; i < n; i++){
-        key = a[i][c];
-        int[] keyRow = a[i];
-        j = i - 1;
-        while ((j >= 0) && (a[j][c] > key)){
-            //a[j+1][c] = a[j][c];
-            a[j+1] = a[j];
-            j = j - 1;
-        }
-        //a[j+1][c] = key;
-        a[j+1] = keyRow;
-    }
-}
 
 //alternate radixsort
 function RadixSort(array){
@@ -120,60 +97,16 @@ function 2dto1d(array, startcolumn, startrow, endcolumn, endrow){
     return newarray;
   }
 }
-    
 
-function insertionSort(array){
-  var length=array.length;
-  var key, j;
-  for(var i=1; i<length
+var array={0,8,2,4,3,4,1,5,7,0}
 
-// Implement bucket sort
-function bucketSort(array, bucketSize) {
-  if (array.length === 0) {
-    return array;
-  }
-
-  // Declaring vars
-  var i,
-      minValue = array[0],
-      maxValue = array[0],
-      bucketSize = bucketSize || 5;
-  
-  // Setting min and max values
-  array.forEach(function (currentVal) {
-  	if (currentVal < minValue) {
-  		minValue = currentVal;
-  	} else if (currentVal > maxValue) {
-  		maxValue = currentVal;
-  	}
-  })
-
-  // Initializing buckets
-  var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
-  var allBuckets = new Array(bucketCount);
-  
-  for (i = 0; i < allBuckets.length; i++) {
-    allBuckets[i] = [];
-  }
-  
-  // Pushing values to buckets
-  array.forEach(function (currentVal) {
-  	allBuckets[Math.floor((currentVal - minValue) / bucketSize)].push(currentVal);
-  });
-
-  // Sorting buckets
-  array.length = 0;
-  
-  allBuckets.forEach(function(bucket) {
-  	insertionSort(bucket);
-  	bucket.forEach(function (element) {
-  		array.push(element)
-  	});
-  });
-
-  return array;
+RadixSort(array);
+for(var i=0; i<array.length; i++){
+  document.write(array[i]);
 }
+    
 
 
 
 </script>
+</body>
