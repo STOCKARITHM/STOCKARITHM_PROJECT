@@ -1,40 +1,125 @@
 				<script type="text/javascript">
-function copy(o)
-{
-	var counter = 0;
-	var counting = 0;
-	var v,key;
-	var output = [];
-	output = Array.isArray(o) ? []: {};
-	for(key in o) 
-	{
-		if(o[key]!=undefined)
+// InsertionSort to be used within bucket sort
+
+
+
+
+
+
+   function insertionSort(array)
+   {
+		for(var i = 1; i<= array.length; i+=3) //asdf
 		{
-			for(var x = 0; x <o[key].length; x++)
-			{
-				v="";
-				// quantifier to skip the inclusion of the element
-				// if(o[key][x][4] == 0)
-				// {
-				// 	continue;
-				// }
-				for(var y= 0; y< o[key][x].length; y++)
-				{
-				v = o[key][x][y];
-				//document.write(v);
-				//document.write("<br>");
 
-				output[counter] = (typeof v === "object") ? copy(v) : v;	
-				counter ++;	
-				
-				}
 
+			
+			var temp11 = array[i-1];
+			var temp12 = array[i];
+			var temp13 = array[i+1];
+
+			var j = i-3; //asdf
+			while(j>= 0 && Number(sorted[j])>Number(temp12))
+			{			
 				
+				array[j+2] = array[j-1];
+				array[j+3] = array[j];
+				array[j+4] = array[j+1];
+
+
+
+				j-=3; //asdfarray
 			}
-	
-		}
-	}
-	return output;
-}
+		
+			array[j+2]= temp11;
+			array[j+3]= temp12;
+			array[j+4]= temp13;
 
+		}
+
+
+
+
+
+
+// Implement bucket sort
+function bucketSort(array, bucketSize)
+ {
+  if (array.length === 0) 
+  {
+    return array;
+  }
+
+  // Declaring vars
+  var i,
+      minValue = array[0][1],
+      maxValue = array[0][1],
+      bucketSize = bucketSize || 5;
+  
+  // Setting min and max values
+
+  for(int i = 0; i<array.length; i++)
+  {
+  	if(array[i][1] < minValue)
+  	{
+  		minValue = array[i][1];
+  	}
+  	else if(array[i][1] > maxValue)
+  	{
+  		maxValue = array[i][1];
+  	}
+  }
+
+
+
+
+
+
+  // Initializing buckets
+  var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+  var allBuckets = new Array(bucketCount);
+  
+  for (i = 0; i < allBuckets.length; i++) 
+  {
+    allBuckets[i] = [];
+  }
+  
+
+  for(int i = 0; i<array.length; i++)
+
+  {
+
+  	allBuckets[Math.floor((array[i][1] - minValue)/bucketSize)].push(array[i][0]);
+  	allBuckets[Math.floor((array[i][1] - minValue)/bucketSize)].push(array[i][1]);
+  	allBuckets[Math.floor((array[i][1] - minValue)/bucketSize)].push(array[i][2]);
+
+
+  }
+
+
+
+
+  // Pushing values to buckets
+
+
+  // Sorting buckets
+  array.length = 0;
+  int i = 0;
+  int j = 0;
+  allBuckets.forEach(function(bucket) 
+  {
+  	insertionSort(bucket);
+  	bucket.forEach(function (element) 
+  	{
+  		array[i][j].push(element);
+  		if(j == 2)
+  		{
+  			j = -1;
+  			i++;
+  		}
+  		j++;
+  	});
+  });
+
+  return array;
+}
 </script>
