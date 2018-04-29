@@ -1,0 +1,176 @@
+<html>
+
+  <head>
+    <title>Stockarithm</title>
+    <style type='text/css'>
+        
+    </style>
+  </head>
+
+  <body>
+
+
+<script language = "JavaScript">
+
+
+
+// //alternate radixsort
+// function RadixSort(array){
+
+//   //get number of digits stored in array
+//   var n=array.length;
+//   var index=0;
+//   var max = maximum(array);
+//   var buckets=[];
+
+//   for(var i=0; i<max+1; i++){
+//     buckets=[]
+//     for(var j=0; j<array.length; j++){
+//       var digit = nthDigit(array[j],i+1);
+
+//       buckets[digit] = buckets[digit]|| [];
+//       buckets[digit].push(array[j]);
+//     }
+//     index=0;
+//     for(var p=0; p<buckets.length; p++){
+//         if(buckets[p] && buckets[p].length > 0){
+//           for(j=0; j<buckets[p].length; j++){
+//             array[index++] = buckets[p][j];
+//           }
+//         }
+//     }
+//   }
+//   return array;
+// }
+
+//used in BucketSort
+function InsertionSort(arr){
+  var n = arr.length;
+
+  for(var i=0; i<n; i++){
+    var keep = arr[i];
+    for(var j=i-1; j>=0 && arr[j]>keep; j--){
+      arr[j+1] = arr[j];
+    }
+    arr[j+1] = keep;
+  }
+
+  return arr;
+}
+
+//Bucketsort
+//parameters: array and bucketsize
+function BucketSort(arr, bSize){
+  var n=arr.length;
+
+  //tests for equaltiy of value and type
+  if(n===0){
+    return arr;
+  }
+
+  var i, 
+  min=arr[0],
+  max=arr[0],
+  bSize=bSize || 5;
+
+  array.forEach(function (current){
+    if(current < min){
+      min=current;
+    }
+    else if(current>max){
+      max=current;
+    }
+})
+
+  var bCount=Math.floor((max-min)/bSize)+1;
+
+  var Buckets=new Array(bCount);
+
+  for(i=0; i<Buckets.length; i++){
+    Buckets[i]=[];
+  }
+
+  array.forEach(function (current){
+    Buckets[Math.floor((current-min)/bSize)].push(current);
+  });
+
+  arr.length=0;
+
+  Buckets.forEach(function(bucket){
+    InsertionSort(bucket);
+    bucket.forEach(function (comp){
+      arr.push(comp);
+    });
+  });
+
+  return arr;
+}
+
+
+// var nthDigit = function(number, nth){
+//   var answer=0;
+
+//   while(nth--){
+//     answer=number % 10;
+//     number=Math.floor((number-answer)/10);
+//   }
+// }
+
+//helper functions for bucketsort above
+// function maximum(array){
+//   var n=array.length;
+//   var max=array[0];
+//   for(var i=0; i<n; i++){
+//     if(array[i]>max){
+//       max=array[i];
+//     }
+//   }
+//   return max;
+// }
+
+
+
+//function to change 2d array to 1d array based on column specification and row specification 
+//the end and start row are inclusive 
+function Twodto1d(array, startcolumn, startrow, endcolumn, endrow){
+
+  //new array that will be 1D
+  var newarray= [];
+  
+  //use to increment the 1d array index
+  var i=0;
+  
+  //if there is no change in column just copy downward 
+  if(startcolumn==endcolumn){
+    for(startrow; startrow<=endrow; startrow++){
+      newarray[i]=array[startrow][startcolumn];
+      i++;
+    }
+    return newarray;
+  }
+  //if there is no change in row simply copy across 
+  if(startrow==endrow){
+    for(startcolumn; startcolumn<=endcolumn; startcolumn++){
+      newarray[i]=array[startrow][startcolumn];
+      i++;
+    }
+    return newarray;
+  }
+}
+document.write("hello");
+var array=[];
+array[0]=2;
+array[1]=1;
+array[2]=5;
+array[3]=0;
+
+array=BucketSort(array);
+for(var i=0; i<array.length; i++){
+  document.write(array[i]);
+}
+
+
+
+
+</script>
+</body>
