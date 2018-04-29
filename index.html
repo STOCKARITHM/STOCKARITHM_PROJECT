@@ -7,15 +7,24 @@
     <link rel="canonical" href="http://html5-templates.com/" />
     <title>Stockarithm</title>
     <meta name="description" content="Stockarithm">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>localStorage.setItem("chad", "Palmer");</script>
 </head>
 
 <body>
 	<header>
-		<div id="logo"><img src="./stock.png">Stockarithm</div>
-
-	</header>
+	<table style="width: 100%;" >
+	<tbody>
+	<tr>
+	<td><div id="logo"><img src="images/stock.png">Stockarithm</div></td>
+	<td><form action="result.html" target="_blank">
+		<input name="symbol" size = "8" type="text" placeholder="Symbol" />  
+		<button type="submit" value="Submit">Search</button>
+		</form></td>
+	</tr>
+	</tbody>
+	</table>
+		</header>
 	<section>
 		<strong>This is where we can put the title of our stock stuff.</strong>
 	</section>
