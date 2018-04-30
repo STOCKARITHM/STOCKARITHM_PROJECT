@@ -1,0 +1,20 @@
+function average(array,column){
+  var sum=0;
+  var avg=0;
+  for(var i=0; i<3; i++){
+    sum+=array[i][column];
+  }
+  avg=sum/3;
+  return avg;
+}
+
+function standardDeviation(array, column){
+  var Xi=0;
+  var sum=0;
+  for(var i=0; i<3; i++){
+    Xi=array[i][column];
+    sum+=Math.pow(Xi-average(array,column), 2);
+  }
+  var standardDev = Math.sqrt((sum/3));
+  return standardDev;
+}
