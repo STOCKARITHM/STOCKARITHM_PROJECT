@@ -117,10 +117,212 @@ var getURL = (string) => {
 let HashTable = function() {
   let storage = [];
   let twodim = [];
-  
   const max = 1000;
   var thisHash = this;
-  //currently prints all hash indexes that are defined
+function copy(o)
+{
+  var counter = 0;
+  var counting = 0;
+  var v,key;
+  var output = [];
+  output = Array.isArray(o) ? []: {};
+
+    
+      for(var x = 0; x <o.length; x++)
+      {
+        v="";
+        
+        for(var y= 0; y< o[x].length; y++)
+        {
+        v = o[x][y];
+        //document.write(v);
+        //document.write("<br>");
+
+        output[counter] = (typeof v === "object") ? copy(v) : v;  
+        counter ++; 
+        
+        }
+
+        
+      }
+  
+    
+  
+  return output;
+}
+
+
+
+
+
+  thisHash.Bucketsort = function(bucketsize)
+  {
+    array = copy(twodim);
+    //document.write(array);
+    if (array.length === 0) 
+    {
+    return array;
+    }
+
+  // Declaring vars
+  var i,
+      minValue = array[1],
+      maxValue = array[1],
+      bucketSize = bucketSize || 5;
+  
+  // Setting min and max values
+  for(var i = 1; i<array.length; i+=13)
+  {
+    if(array[i] < minValue)
+    {
+      minValue = array[i];
+    }
+    else if(array[i] > maxValue)
+    {
+      maxValue = array[i];
+    }
+  }
+
+  // Initializing buckets
+  var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+  var allBuckets = new Array(bucketCount);
+  
+  for (i = 0; i < allBuckets.length; i++)
+  {
+    allBuckets[i] = [];
+  }
+  
+  // Pushing values to buckets
+  var temper = array.length;
+  for(var i = 1; i<temper; i+=13)
+  {
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-1]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+1]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+2]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+3]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+4]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+5]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+6]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+7]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+8]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+9]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+10]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+11]);
+  }
+  // Sorting buckets
+  array.length = 0;
+  for(var i = 0; i<allBuckets.length; i ++)
+  {
+    if(allBuckets[i]!= undefined)
+    {
+      document.write(allBuckets[i]);
+
+      document.write("<br>");
+      document.write("doot");
+      document.write("<br>");
+    }
+
+  }
+  for(var k = 0; k<allBuckets.length; k++)
+  {
+    if(allBuckets[k].length <13)
+    {
+      continue;
+    }
+    for(var i = 1; i<= allBuckets[k].length; i+=13) //asdf
+    {
+      var temp1 = allBuckets[k][i-1]; 
+      var temp2 = allBuckets[k][i];
+      var temp3 = allBuckets[k][i+1];
+      var temp4 = allBuckets[k][i+2];
+      var temp5 = allBuckets[k][i+3];
+      var temp6 = allBuckets[k][i+4];
+      var temp7 = allBuckets[k][i+5];
+      var temp8 = allBuckets[k][i+6];
+      var temp9 = allBuckets[k][i+7];
+      var temp10 = allBuckets[k][i+8];
+      var temp11 = allBuckets[k][i+9];
+      var temp12 = allBuckets[k][i+10];
+      var temp13 = allBuckets[k][i+11];
+
+      var j = i-13; //asdf
+      while(j>= 0 && Number(allBuckets[k][j])>Number(temp12))
+      {     
+        allBuckets[k][j+12] = allBuckets[k][j-1];   
+        allBuckets[k][j+13] = allBuckets[k][j];
+        allBuckets[k][j+14] = allBuckets[k][j+1];
+        allBuckets[k][j+15] = allBuckets[k][j+2];
+        allBuckets[k][j+16] = allBuckets[k][j+3];
+        allBuckets[k][j+17] = allBuckets[k][j+4];
+        allBuckets[k][j+18] = allBuckets[k][j+5];
+        allBuckets[k][j+19] = allBuckets[k][j+6];
+        allBuckets[k][j+20] = allBuckets[k][j+7];
+        allBuckets[k][j+21] = allBuckets[k][j+8];
+        allBuckets[k][j+22] = allBuckets[k][j+9];
+        allBuckets[k][j+23] = allBuckets[k][j+10];
+        allBuckets[k][j+24] = allBuckets[k][j+11];
+
+
+
+        j-=13; //asdf
+      }
+      allBuckets[k][j+12] = temp1;
+      allBuckets[k][j+13] = temp2;
+      allBuckets[k][j+14] = temp3;
+      allBuckets[k][j+15] = temp4;
+      allBuckets[k][j+16] = temp5;
+      allBuckets[k][j+17]= temp6;
+      allBuckets[k][j+18]= temp7;
+      allBuckets[k][j+19]= temp8;
+      allBuckets[k][j+20]= temp9;
+      allBuckets[k][j+21]= temp10;
+      allBuckets[k][j+22]= temp11;
+      allBuckets[k][j+23]= temp12;
+      allBuckets[k][j+24]= temp13;
+
+    }
+  }
+        document.write("<br>");
+      document.write("<br>");
+      document.write("<br>");
+      document.write("<br>");
+      document.write("<br>");
+
+
+var panzer = 0;
+  for(var z = 0; z<allBuckets.length; z++)
+  {
+    if(allBuckets[z].length > 12)
+    {
+      let boop = new Array();
+
+      boop.push(allBuckets[z]);
+      array[panzer] = boop;
+      panzer ++;
+    }
+  }
+  for(var i = 0; i<array.length; i ++)
+  {
+    if(array[i]!= undefined)
+    {
+      document.write(array[i]);
+
+      document.write("<br>");
+      document.write("doot");
+      document.write("<br>");
+    }
+
+  }
+
+
+
+  return array;
+  }
+
+
+
+
       //this function needs to be changed/have several versions to benefit us
   thisHash.print = function() {
     for(var i = 0; i< twodim.length; i++)
@@ -308,7 +510,8 @@ let ht = new HashTable();
         <script language="JavaScript">
                   
                   //prints whole hash
-                  ht.print();
+                  //ht.print();
+                  ht.Bucketsort(5);
                   //prints just info of stock "KEY"
                   //ht.printinfo("KEY");
         </script>
