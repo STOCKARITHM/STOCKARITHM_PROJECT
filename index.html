@@ -22,10 +22,9 @@
 	<tbody>
 	<tr>
 	<td><div id="logo"><img src="images/stock.png">Stockarithm</div></td>
-	<td><form action="result.html" target="result">
-		<input name="symbol" size = "8" type="text" placeholder="Symbol" />  
-		<button type="submit" value="Submit">Search</button>
-		</form></td>
+		<td><input id="symbol" size = "8" type="text" placeholder="Symbol" />  
+			<button onclick="putChart()" value="Submit">Search</button>
+			</form></td>
 	</tr>
 	</tbody>
 	</table>
@@ -53,3 +52,66 @@
 </body>
 
 </html>
+
+<script>
+function putChart() {
+		document.write("<img src=\"");
+						document.write(stockLogo);
+						document.write("\" height=64 align=\"bottom\"><br><br>");
+						document.write(company);
+		/*
+	<section id="pageContent">
+		<main role="main">
+			<article>
+			<table>
+				<tr valign="middle"><td>
+			<table>
+			<tbody>
+			<tr>
+			<td>Symbol: <script>document.write(sym);</script></td></tr>
+			<tr>
+			<td>Sector: <script>document.write(sector);</script></td></tr>
+			<tr>
+			<td>Current Price: <script>document.write(price);</script></td></tr>
+			<tr>
+			<td>Change: <script>
+						if (change < 0) document.write("<img src=\"images/down.png\" align=\"middle\">");
+						else if (change > 0) document.write("<img src=\"images/up.png\" align=\"middle\">");
+						else document.write("No Change");
+						</script>
+			</td>
+			</tr>
+			</tbody>
+			</tr>
+			</table>
+		</td>
+		<td>
+			<canvas id="myChart" width="500" height="200"></canvas>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+			<script>var ctx = document.getElementById('myChart').getContext('2d');
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'line',
+
+					    // The data for our dataset
+					    data: {
+					        labels: ["12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
+					        datasets: [{
+					            label: "One-Year History",
+					            backgroundColor: 'rgb(255, 99, 132)',
+					            borderColor: 'rgb(255, 99, 132)',
+					            data: [0, 10, 5, 2, 20, 30, 45],
+					        }]
+					    },
+
+    // Configuration options go here
+    options: {}
+});</script>
+
+*/
+
+
+
+	//document.getElementById("result").innerHTML = document.getElementById("symbol").value;
+}
+</script>

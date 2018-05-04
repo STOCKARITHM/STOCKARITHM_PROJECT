@@ -1,103 +1,3 @@
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<html>
-
-  <head>
-    <title>Stockarithm</title>
-    <style type='text/css'>
-    #header
-    {
-      height:7%;
-    }
-    #Indeces
-    {
-      float: left;
-      width: 100%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-      text-align: center;
-    }
-    #IndexSpacing
-    {
-      float: left;
-      width: 22%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-    }
-    #Index1
-    {
-      float: left;
-      width: 15%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-      text-align: center;
-    }
-    #Index2
-    {
-      float: left;
-      width: 15%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-    }
-    #Index3
-    {
-      float: left;
-      width: 15%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-    }
-    #Index4
-    {
-      float: left;
-      width: 15%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-    }
-    #ShowSelectedStates
-    {
-      float: left;
-      width: 15%;
-      background: white;
-      height: 10%;
-      box-sizing: border-box;
-      padding: .5em;
-    }
-    #States 
-    {
-     float: left;
-     width: 0%;
-     background: white;
-     height: 80%;
-     overflow: auto;
-     box-sizing: border-box;
-     padding: 0.5em;
-    }
-    #right
-    {
-     float: left;
-     width: 100%;
-     background: white;
-     height: 80%;
-     overflow: auto;
-     box-sizing: ;
-     padding: 0em;
-    }
-    </style>
-  </head>
-
-  <body>
-<script language = "JavaScript">
 var max = 1000;
 var dimplus =0;
 var dimcounter = 0;
@@ -386,22 +286,7 @@ var panzer = 0;
     dimcounter ++;
     onedim[dimcounter] = value13;
     dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
+
     twodim[dimplus] = onedim;
     dimplus ++;
 
@@ -510,28 +395,3 @@ var panzer = 0;
 };
 let ht = new HashTable();
   ht.getData();
-        </script>
-
-    <div id = "header">
-      <font size= "40">
-          &nbsp Stockarithm
-      </font>
-    </div>
-    
-    <div id= "content">
-
-      <div id = "right">
-        <script language="JavaScript">
-                  
-                  //prints whole hash
-                  ht.print();
-                  //ht.Bucketsort(5);
-                  //prints just info of stock "KEY"
-                  //ht.printinfo("GOOG");
-        </script>
-
-      </div>
-    </div>
-
-  </body>
-</html>
