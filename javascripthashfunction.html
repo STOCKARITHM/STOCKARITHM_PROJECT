@@ -108,9 +108,15 @@ var hash = (string, max) => {
   }
   return hash % max;
 };
-var getURL = (string) => {
+var getChartURL = (string) => {
   var str1 = "https://api.iextrading.com/1.0/stock/";
   var str2 = "/chart/1y";
+  var fullString = str1.concat(string, str2);
+  return fullString; 
+};
+var getEPSURL = (string) => {
+  var str1 = "https://api.iextrading.com/1.0/stock/";
+  var str2 = "/earnings";
   var fullString = str1.concat(string, str2);
   return fullString; 
 };
@@ -313,18 +319,19 @@ var panzer = 0;
       document.write("<br>");
        if(storage[i]!=undefined)
         {
-       // document.write(storage[i]);
-        //document.write("<br>");
+       //document.write(storage[i]);
+       //document.write("<br>");
         }
     }
    }
 //adds the stock symbol and value to hash table, will need to be altered for more datapoints per symbol
 
   thisHash.add = function(key) {  
-  var value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12;
+  var value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13;
   dimcounter = 0;
+  //Grab and assign chart prices
   $.ajax({
-  url: getURL(key),
+  url: getChartURL(key),
   async: false,
   dataType: 'json',
   success: function (json) {
@@ -340,8 +347,17 @@ var panzer = 0;
     value9 = json[8*n].close;
     value10 = json[9*n].close;
     value11 = json[10*n].close;
-    value12 = json[json.length - 1].close;  
-    let onedim = new Array();
+    value12 = json[json.length - 1].close;    
+  }
+});
+  //Grab and assign EPS
+  $.ajax({
+  url: getEPSURL(key),
+  async: false,
+  dataType: 'json',
+  success: function (json) {
+  value13 = json.earnings[0].actualEPS;  
+  let onedim = new Array();
     onedim[dimcounter] = key;
     dimcounter++;
     onedim[dimcounter] = value1;
@@ -368,21 +384,21 @@ var panzer = 0;
     dimcounter ++;
     onedim[dimcounter] = value12;
     dimcounter ++;
+    onedim[dimcounter] = value13;
+    dimcounter ++;
 
     twodim[dimplus] = onedim;
     dimplus ++;
 
-
-
-
-
   }
 });
+
+
 
     var index = hash(key, max);
     if (storage[index] === undefined) {
       storage[index] = [
-        [key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12]
+        [key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13]
       ];
     } else {
       var inserted = false;
@@ -400,11 +416,12 @@ var panzer = 0;
           storage[index][i][10] = value10;
           storage[index][i][11] = value11;
           storage[index][i][12] = value12;
+          storage[index][i][13] = value13;
           inserted = true;
         }
       }
       if (inserted === false) {
-        storage[index].push([key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12]);
+        storage[index].push([key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13]);
       }
     }
   };
@@ -492,10 +509,10 @@ let ht = new HashTable();
         <script language="JavaScript">
                   
                   //prints whole hash
-                  //ht.print();
-                  ht.Bucketsort(5);
+                  ht.print();
+                  //ht.Bucketsort(5);
                   //prints just info of stock "KEY"
-                  //ht.printinfo("KEY");
+                  //ht.printinfo("GOOG");
         </script>
 
       </div>
