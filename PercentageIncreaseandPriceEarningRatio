@@ -1,14 +1,18 @@
+
 //function calculates percentage increase over a number of months 
 //parameter column represents the amount of months 
 //rank on highest percentage increase
-function percentageIncrease(array, numrows, column){
+function percentageIncrease(array, row, numcolumns){
+
   var increase = 0; 
 
-  var difference = array[numrows-1][column] - array[0][column];
+  var difference = array[row][numcolumns] - array[row][1];
 
-  increase = (difference / array[0][column]) * 100;
+  increase = (difference / array[row][1]) * 100;
+  
   return increase;
 }
+
 
 //function calculates price/earning ratio for however many months 
 //parameter column represents the amount of months 
@@ -17,6 +21,7 @@ function priceEarningRatio(array, column){
   var ratio=0;
   var price=0;
   var earning=0;
+  
   //get earning either from array or using api directly 
 
   //divide earning and price for the month 
