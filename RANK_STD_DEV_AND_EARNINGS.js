@@ -98,7 +98,7 @@
 
 
       var j = i-21; //asdf
-      while(j>= 0 && Number(allBuckets[k][j])>Number(temp12))
+      while(j>= 0 && Number(allBuckets[k][j])>Number(temp14))
       {     
         allBuckets[k][j+8] = allBuckets[k][j-13];   
         allBuckets[k][j+9] = allBuckets[k][j-12];
@@ -147,7 +147,7 @@
 var panzer = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 12)
+    if(allBuckets[z].length > 20)
     {
       let boop = new Array();
       boop.push(allBuckets[z]);
@@ -267,7 +267,7 @@ var panzer = 0;
 
 
       var j = i-21; //asdf
-      while(j>= 0 && Number(allBuckets[k][j])>Number(temp12))
+      while(j>= 0 && Number(allBuckets[k][j])>Number(temp17))
       {     
         allBuckets[k][j+5] = allBuckets[k][j-16];   
         allBuckets[k][j+6] = allBuckets[k][j-15];
@@ -316,7 +316,7 @@ var panzer = 0;
 var panzer = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 12)
+    if(allBuckets[z].length > 20)
     {
       let boop = new Array();
       boop.push(allBuckets[z]);
