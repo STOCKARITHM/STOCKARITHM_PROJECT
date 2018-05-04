@@ -4,13 +4,13 @@
 //rank on highest percentage increase
 function percentageIncrease(array, row, numcolumns){
 
-  var increase = 0; 
+  var change = 0; 
 
   var difference = array[row][1] - array[row][numcolumns];
 
-  increase = (difference / array[row][1]) * 100;
+  change = (difference / array[row][1]) * 100;
   
-  return increase;
+  array[row][14]=change;
 }
 
 
