@@ -5,7 +5,7 @@ function average(array,row){
     sum+=array[row][i];
   }
   avg=sum/12;
-  return avg;
+  array[row][15]=avg;
 }
 
 function standardDeviation(array, row){
@@ -16,5 +16,5 @@ function standardDeviation(array, row){
     sum+=Math.pow(Xi-average(array,row), 2);
   }
   var standardDev = Math.sqrt((sum/3));
-  return standardDev;
+  array[row][16]=standardDev;
 }
