@@ -157,7 +157,8 @@ var panzer = 0;
   }
   var count=1;
   for(var i=0; i<500; i++){
-    array[i][17]+=count;
+    array[i][17]=count;
+    array[i][20]+=count;
     count++;
   }
 
@@ -325,7 +326,8 @@ var panzer = 0;
   }
   var count=1;
   for(var i=0; i<500; i++){
-    array[i][19]+=count;
+    array[i][19]=count;
+    array[i][20]+=count;
     count++;
   }
 
