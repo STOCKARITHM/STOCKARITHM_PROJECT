@@ -6,7 +6,7 @@ function percentageIncrease(array, row, numcolumns){
 
   var increase = 0; 
 
-  var difference = array[row][numcolumns] - array[row][1];
+  var difference = array[row][1] - array[row][numcolumns];
 
   increase = (difference / array[row][1]) * 100;
   
