@@ -1,19 +1,19 @@
-function average(array,column){
+function average(array,row){
   var sum=0;
   var avg=0;
-  for(var i=0; i<3; i++){
-    sum+=array[i][column];
+  for(var i=1; i<13; i++){
+    sum+=array[row][i];
   }
-  avg=sum/3;
+  avg=sum/12;
   return avg;
 }
 
-function standardDeviation(array, column){
+function standardDeviation(array, row){
   var Xi=0;
   var sum=0;
-  for(var i=0; i<3; i++){
-    Xi=array[i][column];
-    sum+=Math.pow(Xi-average(array,column), 2);
+  for(var i=1; i<13; i++){
+    Xi=array[row][i];
+    sum+=Math.pow(Xi-average(array,row), 2);
   }
   var standardDev = Math.sqrt((sum/3));
   return standardDev;
