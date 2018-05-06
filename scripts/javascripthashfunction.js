@@ -750,7 +750,7 @@ var panzer = 0; //counter
 
 
 var counter = 1;
-for(int i =0; i<500; i++)
+for(var i =0; i<500; i++)
 {
   array[i][18] = counter;
   array[i][20]+= counter;
