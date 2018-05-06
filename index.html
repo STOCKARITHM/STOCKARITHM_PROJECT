@@ -9,10 +9,12 @@
     <meta name="description" content="Stockarithm">
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="scripts/javascripthashfunction.js"></script>
     <script>
-    	let ht = new HashTable();
+	   	let ht = new HashTable();
   		ht.getData();
+  		//document.getElementById("stockSymbol").innerHTML = "Page Loaded."
      </script>
 </head>
 
@@ -30,17 +32,36 @@
 	</table>
 		</header>
 	<section>
-	<form action="text.html" target="result">
-		<button type="submit">Make it so</button>
-		</form>
+			<button onclick="getEarnings()">Earnings Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getEarnings()">Percent Change Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getEarnings()">Standard Deviation Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getEarnings()">Overall Rank</button>
 	</section>
 	<section id="pageContent">
 		<main role="main">
 			<article>
-			<div id="result"></div>
+			<div id="result">
+				<table>
+				<tr><td><div id="myLogo"></div></td></tr>
+				<tr valign="middle"><td>
+					<table>
+					<tr>
+					<td><div id="stockSymbol"></div></td></tr>
+					<tr>
+					<td><div id="sector"></div></td></tr>
+					<tr>
+					<td><div id="price"></div></td></tr>
+					<tr>
+					<td><div id="change"></div></td>
+					</tr>
+					</table>
+
+				</td>
+				<td><td><canvas id="myChart" width="500" height="200"></canvas></td>
+				</tr>
+				</table>
+			</div>
 			</article>
-
-
 		</main>
 
 	</section>
@@ -55,40 +76,82 @@
 
 <script>
 function putChart() {
-		document.write("<img src=\"");
-						document.write(stockLogo);
-						document.write("\" height=64 align=\"bottom\"><br><br>");
-						document.write(company);
-		/*
-	<section id="pageContent">
-		<main role="main">
-			<article>
-			<table>
-				<tr valign="middle"><td>
-			<table>
-			<tbody>
-			<tr>
-			<td>Symbol: <script>document.write(sym);</script></td></tr>
-			<tr>
-			<td>Sector: <script>document.write(sector);</script></td></tr>
-			<tr>
-			<td>Current Price: <script>document.write(price);</script></td></tr>
-			<tr>
-			<td>Change: <script>
-						if (change < 0) document.write("<img src=\"images/down.png\" align=\"middle\">");
-						else if (change > 0) document.write("<img src=\"images/up.png\" align=\"middle\">");
-						else document.write("No Change");
-						</script>
-			</td>
-			</tr>
-			</tbody>
-			</tr>
-			</table>
-		</td>
-		<td>
-			<canvas id="myChart" width="500" height="200"></canvas>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-			<script>var ctx = document.getElementById('myChart').getContext('2d');
+
+function parse_query_string(query) {
+  var vars = query.split("&");
+  var query_string = {};
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = decodeURIComponent(pair[1]);
+      // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+      query_string[pair[0]] = arr;
+      // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(decodeURIComponent(pair[1]));
+    }
+  }
+  return query_string;
+}
+
+var query = document.getElementById("symbol").value;
+//var qs = parse_query_string(query);
+var sym = query.toUpperCase();
+
+function getQuote(string) {
+  var str1 = "https://api.iextrading.com/1.0/stock/";
+  var str2 = "/quote";
+  var fullString = str1.concat(string, str2);
+  return fullString; 
+};
+
+function getLogo(string) {
+  var str1 = "https://api.iextrading.com/1.0/stock/";
+  var str2 = "/logo";
+  var fullString = str1.concat(string, str2);
+  return fullString; 
+};
+
+var company, sector, price, change, stockLogo;
+$.ajax({
+  url: getQuote(sym),
+  async: false,
+  dataType: 'json',
+  success: function (json) {
+      company = json.companyName;
+      sector = json.sector;
+      price = json.latestPrice.toFixed(2);
+      change = json.change;
+  }
+});
+
+$.ajax({
+  url: getLogo(sym),
+  async: false,
+  dataType: 'json',
+  success: function (json) {
+      stockLogo = json.url;
+  }
+});
+
+document.getElementById("myLogo").innerHTML = company;
+
+document.getElementById("stockSymbol").innerHTML = "Symbol: ";
+document.getElementById("stockSymbol").innerHTML += sym;
+document.getElementById("sector").innerHTML = "Sector: ";
+document.getElementById("sector").innerHTML += sector;
+document.getElementById("price").innerHTML = "Price: ";
+document.getElementById("price").innerHTML += price;
+document.getElementById("change").innerHTML = "Change: ";
+		if (change < 0) document.getElementById("change").innerHTML += "<img src=\"images/down.png\" align=\"middle\">";
+		else if (change > 0) document.getElementById("change").innerHTML += "<img src=\"images/up.png\" align=\"middle\">";
+		else document.getElementById("change").innerHTML += "No Change";
+
+ht.getStock(sym);
+var ctx = document.getElementById('myChart').getContext('2d');
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'line',
@@ -100,18 +163,37 @@ function putChart() {
 					            label: "One-Year History",
 					            backgroundColor: 'rgb(255, 99, 132)',
 					            borderColor: 'rgb(255, 99, 132)',
-					            data: [0, 10, 5, 2, 20, 30, 45],
+					            data: [singleStock[1], singleStock[2], singleStock[3], singleStock[4], singleStock[5], singleStock[6], singleStock[7], singleStock[8], singleStock[9], singleStock[10], singleStock[11], singleStock[12]],
 					        }]
 					    },
 
     // Configuration options go here
     options: {}
-});</script>
+});
 
-*/
+}
 
+function getEarnings()
+{
+	ht.BucketsortEarn(5);
+	ht.print();
+}
 
+function getPercent()
+{
+	ht.percentsort(5);
+	ht.print();
+}
 
-	//document.getElementById("result").innerHTML = document.getElementById("symbol").value;
+function getDeviation()
+{
+	ht.BucketsortDev(5);
+	ht.print();
+}
+
+function getOverall()
+{
+	ht.overallsort(5);
+	ht.print();
 }
 </script>

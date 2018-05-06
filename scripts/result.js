@@ -18,7 +18,7 @@ function parse_query_string(query) {
   return query_string;
 }
 
-var query = window.location.search.substring(1);
+var query = document.getElementById("symbol").value;
 var qs = parse_query_string(query);
 var sym = qs.symbol.toUpperCase();
 
