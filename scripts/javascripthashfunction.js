@@ -34,7 +34,7 @@ function copy(o)
   var output = [];
   output = Array.isArray(o) ? []: {};
 
-    
+      //document.write("check");
       for(var x = 0; x <o.length; x++)
       {
         v="";
@@ -51,7 +51,9 @@ function copy(o)
         }
 
         
-      }
+      }      
+    
+
   
     
   
@@ -59,162 +61,29 @@ function copy(o)
 }
 
 
-  thisHash.Bucketsort = function(bucketsize)
-  {
-    array = copy(twodim);
-    //document.write(array);
-    if (array.length === 0) 
-    {
-    return array;
-    }
-
-  // Declaring vars
-  var i,
-      minValue = array[1],
-      maxValue = array[1],
-      bucketSize = bucketSize || 5;
-  
-  // Setting min and max values
-  for(var i = 1; i<array.length; i+=13)
-  {
-    if(array[i] < minValue)
-    {
-      minValue = array[i];
-    }
-    else if(array[i] > maxValue)
-    {
-      maxValue = array[i];
-    }
-  }
-
-  // Initializing buckets
-  var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
-  var allBuckets = new Array(bucketCount);
-  
-  for (i = 0; i < allBuckets.length; i++)
-  {
-    allBuckets[i] = [];
-  }
-  
-  // Pushing values to buckets
-  var temper = array.length;
-  for(var i = 1; i<temper; i+=13)
-  {
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-1]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+1]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+2]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+3]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+4]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+5]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+6]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+7]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+8]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+9]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+10]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+11]);
-  }
-  // Sorting buckets
-  array.length = 0;
-
-  for(var k = 0; k<allBuckets.length; k++)
-  {
-    if(allBuckets[k].length <13)
-    {
-      continue;
-    }
-    for(var i = 1; i<= allBuckets[k].length; i+=13) //asdf
-    {
-      var temp1 = allBuckets[k][i-1]; 
-      var temp2 = allBuckets[k][i];
-      var temp3 = allBuckets[k][i+1];
-      var temp4 = allBuckets[k][i+2];
-      var temp5 = allBuckets[k][i+3];
-      var temp6 = allBuckets[k][i+4];
-      var temp7 = allBuckets[k][i+5];
-      var temp8 = allBuckets[k][i+6];
-      var temp9 = allBuckets[k][i+7];
-      var temp10 = allBuckets[k][i+8];
-      var temp11 = allBuckets[k][i+9];
-      var temp12 = allBuckets[k][i+10];
-      var temp13 = allBuckets[k][i+11];
-
-      var j = i-13; //asdf
-      while(j>= 0 && Number(allBuckets[k][j])>Number(temp12))
-      {     
-        allBuckets[k][j+12] = allBuckets[k][j-1];   
-        allBuckets[k][j+13] = allBuckets[k][j];
-        allBuckets[k][j+14] = allBuckets[k][j+1];
-        allBuckets[k][j+15] = allBuckets[k][j+2];
-        allBuckets[k][j+16] = allBuckets[k][j+3];
-        allBuckets[k][j+17] = allBuckets[k][j+4];
-        allBuckets[k][j+18] = allBuckets[k][j+5];
-        allBuckets[k][j+19] = allBuckets[k][j+6];
-        allBuckets[k][j+20] = allBuckets[k][j+7];
-        allBuckets[k][j+21] = allBuckets[k][j+8];
-        allBuckets[k][j+22] = allBuckets[k][j+9];
-        allBuckets[k][j+23] = allBuckets[k][j+10];
-        allBuckets[k][j+24] = allBuckets[k][j+11];
-
-
-
-        j-=13; //asdf
-      }
-      allBuckets[k][j+12] = temp1;
-      allBuckets[k][j+13] = temp2;
-      allBuckets[k][j+14] = temp3;
-      allBuckets[k][j+15] = temp4;
-      allBuckets[k][j+16] = temp5;
-      allBuckets[k][j+17]= temp6;
-      allBuckets[k][j+18]= temp7;
-      allBuckets[k][j+19]= temp8;
-      allBuckets[k][j+20]= temp9;
-      allBuckets[k][j+21]= temp10;
-      allBuckets[k][j+22]= temp11;
-      allBuckets[k][j+23]= temp12;
-      allBuckets[k][j+24]= temp13;
-
-    }
-  }
-
-
-
-var panzer = 0;
-  for(var z = 0; z<allBuckets.length; z++)
-  {
-    if(allBuckets[z].length > 12)
-    {
-      let boop = new Array();
-
-      boop.push(allBuckets[z]);
-      array[panzer] = boop;
-      panzer ++;
-    }
-  }
-  for(var i = 0; i<array.length; i ++)
-  {
-    if(array[i]!= undefined)
-    {
-      document.write(array[i]);
-      document.write("<br>");
-    }
-
-  }
-
-
-
-  return array;
-  }
-
-
-
-
       //this function needs to be changed/have several versions to benefit us
-  thisHash.print = function() {
-         document.getElementById("result").innerHTML = "";
-    for(var i = 0; i< twodim.length; i++)
+  thisHash.print = function(rank) {
+            document.getElementById("result").innerHTML = "";
+if(rank == 20)
+{
+  for(var x = 0; x<twodim.length; x++)
+  {
+       document.getElementById("result").innerHTML += twodim[x][rank];
+        document.getElementById("result").innerHTML += "|";
+
+        //document.getElementById("result").innerHTML += 500-i;       
+        document.getElementById("result").innerHTML += twodim[x][0];
+        document.getElementById("result").innerHTML += "<br>";
+ //     document.write(twodim[i]);
+  }
+}else{
+         //document.getElementById("result").innerHTML = (twodim.length);
+    for(var i =twodim.length-1; i>-1; i--)
      {
- 
+        document.getElementById("result").innerHTML += twodim[i][rank];
+        document.getElementById("result").innerHTML += "|";
+
+        //document.getElementById("result").innerHTML += 500-i;       
         document.getElementById("result").innerHTML += twodim[i][0];
         document.getElementById("result").innerHTML += "<br>";
  //     document.write(twodim[i]);
@@ -227,6 +96,7 @@ var panzer = 0;
         }
     }
    }
+ }
 //adds the stock symbol and value to hash table, will need to be altered for more datapoints per symbol
 
   thisHash.add = function(key) {  
@@ -259,7 +129,11 @@ var panzer = 0;
   async: false,
   dataType: 'json',
   success: function (json) {
-  value13 = json.earnings[0].actualEPS;  
+  value13 = json.earnings[0].actualEPS;
+  if(value13== null)
+  {
+    value13 = 0;
+  }  
   let onedim = new Array();
     onedim[dimcounter] = key;
     dimcounter++;
@@ -288,8 +162,6 @@ var panzer = 0;
     onedim[dimcounter] = value12;
     dimcounter ++;
     onedim[dimcounter] = value13;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
     dimcounter ++;
     onedim[dimcounter] = 0;
     dimcounter ++;
@@ -341,6 +213,32 @@ var panzer = 0;
       if (inserted === false) {
         storage[index].push([key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13]);
       }
+    }
+    var sum = 0;
+    var ave = 0;
+    var change =0;
+    var difference = 0;
+    for(var x = 0;x<twodim.length; x++)
+    {
+      sum = 0;
+      ave = 0;
+      for(var u= 1; u<13; u++)
+      {
+        sum += twodim[x][u];
+      }
+      ave = sum/12;
+      sum =0;
+      var xi=0;
+      for(var o = 1; o<13; o++)
+      {
+        xi = twodim[x][o];
+        sum+=Math.pow(xi-ave,2);
+      }
+      twodim[x][16]= Math.sqrt((sum/11));
+
+
+      difference = twodim[x][12]-twodim[x][1];
+      twodim[x][14] = (difference/twodim[x][1])*100;
     }
   };
 
@@ -411,7 +309,7 @@ var panzer = 0;
        xmlhttp.open("GET", "./symbols.txt", false);
        xmlhttp.send();    
   };
-
+  var overall = 0;
   thisHash.overallsort = function(bucketsize)
   {
     array = copy(twodim);
@@ -510,32 +408,32 @@ var panzer = 0;
       var temp20 = allBuckets[k][i-1];
       var temp21 = allBuckets[k][i];
 
-      var j = i-20; //asdf
+      var j = i-21; //asdf
       while(j>= 0 && Number(allBuckets[k][j])>Number(temp21))
       {     
-        allBuckets[k][j] = allBuckets[k][j-20];   
-        allBuckets[k][j+1] = allBuckets[k][j-19];
-        allBuckets[k][j+2] = allBuckets[k][j-18];
-        allBuckets[k][j+3] = allBuckets[k][j-17];
-        allBuckets[k][j+4] = allBuckets[k][j-16];
-        allBuckets[k][j+5] = allBuckets[k][j-15];
-        allBuckets[k][j+6] = allBuckets[k][j-14];
-        allBuckets[k][j+7] = allBuckets[k][j-13];
-        allBuckets[k][j+8] = allBuckets[k][j-12];
-        allBuckets[k][j+9] = allBuckets[k][j-11];
-        allBuckets[k][j+10] = allBuckets[k][j-10];
-        allBuckets[k][j+11] = allBuckets[k][j-9];
-        allBuckets[k][j+12] = allBuckets[k][j-8];
-        allBuckets[k][j+13] = allBuckets[k][j-7];
-        allBuckets[k][j+14] = allBuckets[k][j-6];
-        allBuckets[k][j+15] = allBuckets[k][j-5];
-        allBuckets[k][j+16] = allBuckets[k][j-4];
-        allBuckets[k][j+17] = allBuckets[k][j-3];
-        allBuckets[k][j+18] = allBuckets[k][j-2];
-        allBuckets[k][j+19] = allBuckets[k][j-1];
-        allBuckets[k][j+20] = allBuckets[k][j];
+        allBuckets[k][j+1] = allBuckets[k][j-20];   
+        allBuckets[k][j+2] = allBuckets[k][j-19];
+        allBuckets[k][j+3] = allBuckets[k][j-18];
+        allBuckets[k][j+4] = allBuckets[k][j-17];
+        allBuckets[k][j+5] = allBuckets[k][j-16];
+        allBuckets[k][j+6] = allBuckets[k][j-15];
+        allBuckets[k][j+7] = allBuckets[k][j-14];
+        allBuckets[k][j+8] = allBuckets[k][j-13];
+        allBuckets[k][j+9] = allBuckets[k][j-12];
+        allBuckets[k][j+10] = allBuckets[k][j-11];
+        allBuckets[k][j+11] = allBuckets[k][j-10];
+        allBuckets[k][j+12] = allBuckets[k][j-9];
+        allBuckets[k][j+13] = allBuckets[k][j-8];
+        allBuckets[k][j+14] = allBuckets[k][j-7];
+        allBuckets[k][j+15] = allBuckets[k][j-6];
+        allBuckets[k][j+16] = allBuckets[k][j-5];
+        allBuckets[k][j+17] = allBuckets[k][j-4];
+        allBuckets[k][j+18] = allBuckets[k][j-3];
+        allBuckets[k][j+19] = allBuckets[k][j-2];
+        allBuckets[k][j+20] = allBuckets[k][j-1];
+        allBuckets[k][j+21] = allBuckets[k][j];
 
-        j-=20; //asdf
+        j-=21; //asdf
       }
       allBuckets[k][j+1] = temp1;
       allBuckets[k][j+2] = temp2;
@@ -549,42 +447,62 @@ var panzer = 0;
       allBuckets[k][j+10]= temp10;
       allBuckets[k][j+11]= temp11;
       allBuckets[k][j+12]= temp12;
-      allBuckets[k][j+13]= temp14;
-      allBuckets[k][j+14]= temp15;
-      allBuckets[k][j+15]= temp16;
-      allBuckets[k][j+16]= temp17;
-      allBuckets[k][j+17]= temp18;
-      allBuckets[k][j+18]= temp19;
-      allBuckets[k][j+19]= temp20;
-      allBuckets[k][j+20]= temp21;
+      allBuckets[k][j+13] = temp13;
+      allBuckets[k][j+14]= temp14;
+      allBuckets[k][j+15]= temp15;
+      allBuckets[k][j+16]= temp16;
+      allBuckets[k][j+17]= temp17;
+      allBuckets[k][j+18]= temp18;
+      allBuckets[k][j+19]= temp19;
+      allBuckets[k][j+20]= temp20;
+      allBuckets[k][j+21]= temp21;
     }
   }
 
 
 
-var panzer = 0; //counter
+var panzer = 0;
+var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 20)
+    let boop = new Array();
+    if(allBuckets[z].length > 12)
     {
-      let boop = new Array(); //array to be put into array
-
-      boop.push(allBuckets[z]);
-      array[panzer] = boop;
-      panzer ++;
+      for(var y= 0; y<allBuckets[z].length; y++)
+      {
+        boop.push(allBuckets[z][y]);
+        punto++;
+        if(punto == 21)
+        {
+          punto =0;
+          twodim[panzer] = boop;
+          panzer++;
+          boop = new Array();
+        }
+      }
     }
   }
-  for(var i = 0; i<array.length; i ++)
-  {
-    if(array[i]!= undefined)
-    {
-      document.write(array[i]);
-      document.write("<br>");
-    }
-  }
-  return array;
+  if(overall == 0)
+{
+   var count=1;
+  for(var i=0; i<twodim.length; i++){
+    //twodim[i][18]=count;
+    twodim[i][20]=count;
+    count++;
+  } 
+  overall = 1;
+}
+
+
   }
 
+
+
+
+
+
+
+var percsort = 0;
   thisHash.percentsort = function(bucketsize)
   {
     array = copy(twodim);
@@ -683,32 +601,32 @@ var panzer = 0; //counter
       var temp20 = allBuckets[k][i+5];
       var temp21 = allBuckets[k][i+6];
 
-      var j = i-20; //asdf
+      var j = i-21; //asdf
       while(j>= 0 && Number(allBuckets[k][j])>Number(temp15))
       {     
-        allBuckets[k][j+6] = allBuckets[k][j-14];   
-        allBuckets[k][j+7] = allBuckets[k][j-13];
-        allBuckets[k][j+8] = allBuckets[k][j-12];
-        allBuckets[k][j+9] = allBuckets[k][j-11];
-        allBuckets[k][j+10] = allBuckets[k][j-10];
-        allBuckets[k][j+11] = allBuckets[k][j-9];
-        allBuckets[k][j+12] = allBuckets[k][j-8];
-        allBuckets[k][j+13] = allBuckets[k][j-7];
-        allBuckets[k][j+14] = allBuckets[k][j-6];
-        allBuckets[k][j+15] = allBuckets[k][j-5];
-        allBuckets[k][j+16] = allBuckets[k][j-4];
-        allBuckets[k][j+17] = allBuckets[k][j-3];
-        allBuckets[k][j+18] = allBuckets[k][j-2];
-        allBuckets[k][j+19] = allBuckets[k][j-1];
-        allBuckets[k][j+20] = allBuckets[k][j];
-        allBuckets[k][j+21] = allBuckets[k][j+1];
-        allBuckets[k][j+22] = allBuckets[k][j+2];
-        allBuckets[k][j+23] = allBuckets[k][j+3];
-        allBuckets[k][j+24] = allBuckets[k][j+4];
-        allBuckets[k][j+25] = allBuckets[k][j+5];
-        allBuckets[k][j+26] = allBuckets[k][j+6];
+        allBuckets[k][j+7] = allBuckets[k][j-14];   
+        allBuckets[k][j+8] = allBuckets[k][j-13];
+        allBuckets[k][j+9] = allBuckets[k][j-12];
+        allBuckets[k][j+10] = allBuckets[k][j-11];
+        allBuckets[k][j+11] = allBuckets[k][j-10];
+        allBuckets[k][j+12] = allBuckets[k][j-9];
+        allBuckets[k][j+13] = allBuckets[k][j-8];
+        allBuckets[k][j+14] = allBuckets[k][j-7];
+        allBuckets[k][j+15] = allBuckets[k][j-6];
+        allBuckets[k][j+16] = allBuckets[k][j-5];
+        allBuckets[k][j+17] = allBuckets[k][j-4];
+        allBuckets[k][j+18] = allBuckets[k][j-3];
+        allBuckets[k][j+19] = allBuckets[k][j-2];
+        allBuckets[k][j+20] = allBuckets[k][j-1];
+        allBuckets[k][j+21] = allBuckets[k][j];
+        allBuckets[k][j+22] = allBuckets[k][j+1];
+        allBuckets[k][j+23] = allBuckets[k][j+2];
+        allBuckets[k][j+24] = allBuckets[k][j+3];
+        allBuckets[k][j+25] = allBuckets[k][j+4];
+        allBuckets[k][j+26] = allBuckets[k][j+5];
+        allBuckets[k][j+27] = allBuckets[k][j+6];
 
-        j-=20; //asdf
+        j-=21; //asdf
       }
       allBuckets[k][j+7] = temp1;
       allBuckets[k][j+8] = temp2;
@@ -722,52 +640,63 @@ var panzer = 0; //counter
       allBuckets[k][j+16]= temp10;
       allBuckets[k][j+17]= temp11;
       allBuckets[k][j+18]= temp12;
-      allBuckets[k][j+19]= temp14;
-      allBuckets[k][j+20]= temp15;
-      allBuckets[k][j+21]= temp16;
-      allBuckets[k][j+22]= temp17;
-      allBuckets[k][j+23]= temp18;
-      allBuckets[k][j+24]= temp19;
-      allBuckets[k][j+25]= temp20;
-      allBuckets[k][j+26]= temp21;
+      allBuckets[k][j+19] = temp13;
+      allBuckets[k][j+20]= temp14;
+      allBuckets[k][j+21]= temp15;
+      allBuckets[k][j+22]= temp16;
+      allBuckets[k][j+23]= temp17;
+      allBuckets[k][j+24]= temp18;
+      allBuckets[k][j+25]= temp19;
+      allBuckets[k][j+26]= temp20;
+      allBuckets[k][j+27]= temp21;
     }
   }
 
 
-
-var panzer = 0; //counter
+var panzer = 0;
+var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 20)
+    let boop = new Array();
+    if(allBuckets[z].length > 12)
     {
-      let boop = new Array(); //array to be put into array
-
-      boop.push(allBuckets[z]);
-      array[panzer] = boop;
-      panzer ++;
+      for(var y= 0; y<allBuckets[z].length; y++)
+      {
+        boop.push(allBuckets[z][y]);
+        punto++;
+        if(punto == 21)
+        {
+          punto =0;
+          twodim[panzer] = boop;
+          panzer++;
+          boop = new Array();
+        }
+      }
     }
   }
 
-
-var counter = 1;
-for(var i =0; i<500; i++)
+if(percsort == 0)
 {
-  array[i][18] = counter;
-  array[i][20]+= counter;
-  counter++;
-
+   var count=1;
+  for(var i=500; i>-1; i--){
+    twodim[i][18]=count;
+    twodim[i][20]+=count;
+    count++;
+  } 
+  percsort = 1;
 }
 
   
-twodim = copy(array);
 
 
   }
 
 
 //sort based on earnings 
+var sortearn = 0;
  thisHash.BucketsortEarn = function(bucketsize)
   {
+
     array = copy(twodim);
     //document.write(array);
     if (array.length === 0) 
@@ -884,6 +813,7 @@ twodim = copy(array);
         allBuckets[k][j+25] = allBuckets[k][j+4];
         allBuckets[k][j+26] = allBuckets[k][j+5];
         allBuckets[k][j+27] = allBuckets[k][j+6];
+        allBuckets[k][j+28] = allBuckets[k][j+7];        
         j-=21; //asdf
       }
       allBuckets[k][j+8] = temp1;
@@ -906,34 +836,62 @@ twodim = copy(array);
       allBuckets[k][j+25]= temp18;
       allBuckets[k][j+26]= temp19;
       allBuckets[k][j+27]= temp20;
+      allBuckets[k][j+28]= temp21;
     }
   }
+      //document.write("<br>");
+      //document.write("<br>");
+      //document.write("<br>");
+      //document.write("<br>");
+      //document.write("<br>");
 var panzer = 0;
+var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 20)
+    let boop = new Array();
+    if(allBuckets[z].length > 12)
     {
-      let boop = new Array();
-      boop.push(allBuckets[z]);
-      array[panzer] = boop;
-      panzer ++;
+      for(var y= 0; y<allBuckets[z].length; y++)
+      {
+        boop.push(allBuckets[z][y]);
+        punto++;
+        if(punto == 21)
+        {
+          punto =0;
+          twodim[panzer] = boop;
+          panzer++;
+          boop = new Array();
+        }
+      }
     }
   }
+if(sortearn == 0)
+{
   var count=1;
-  for(var i=0; i<500; i++){
-    array[i][17]=count;
-    array[i][20]+=count;
+  for(var i=500; i>-1; i--){
+    twodim[i][17]=count;
+    twodim[i][20]+=count;
     count++;
   }
+  sortearn=1;  
+}
 
-  twodim=copy(array);
 
 
-
-  return array;
+  //for(var i = 0; i<twodim.length; i ++)
+  //{
+    //if(array[i]!= undefined)
+    
+    //document.write(twodim[i]);
+    //document.write("<br>");
+    //document.write("doot");
+    //document.write("<br>");
+    
+  //}
+  return twodim;
   }
 
-
+var devsort = 0;
 //sort based on std deviation 
  thisHash.BucketsortDev = function(bucketsize)
   {
@@ -1053,6 +1011,7 @@ var panzer = 0;
         allBuckets[k][j+22] = allBuckets[k][j+1];
         allBuckets[k][j+23] = allBuckets[k][j+2];
         allBuckets[k][j+24] = allBuckets[k][j+3];
+        allBuckets[k][j+25] = allBuckets[k][j+4];
         j-=21; //asdf
       }
       allBuckets[k][j+5] = temp1;
@@ -1075,31 +1034,46 @@ var panzer = 0;
       allBuckets[k][j+22]= temp18;
       allBuckets[k][j+23]= temp19;
       allBuckets[k][j+24]= temp20;
+      allBuckets[k][j+25]= temp21;
     }
   }
 var panzer = 0;
+var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 20)
+    let boop = new Array();
+    if(allBuckets[z].length > 12)
     {
-      let boop = new Array();
-      boop.push(allBuckets[z]);
-      array[panzer] = boop;
-      panzer ++;
+      for(var y= 0; y<allBuckets[z].length; y++)
+      {
+        boop.push(allBuckets[z][y]);
+        punto++;
+        if(punto == 21)
+        {
+          punto =0;
+          twodim[panzer] = boop;
+          panzer++;
+          boop = new Array();
+        }
+      }
     }
   }
+if(devsort == 0)
+{
   var count=1;
-  for(var i=0; i<500; i++){
-    array[i][19]=count;
-    array[i][20]+=count;
+  for(var i=500; i>-1; i--){
+    twodim[i][19]=count;
+    twodim[i][20]+=count;
     count++;
   }
+  devsort=1;  
+}
 
-  twodim=copy(array);
 
 
 
-  return array;
+
+  return twodim;
   }
 
 };

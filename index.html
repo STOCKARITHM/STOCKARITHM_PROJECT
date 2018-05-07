@@ -33,9 +33,9 @@
 		</header>
 	<section>
 			<button onclick="getEarnings()">Earnings Rank</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="getEarnings()">Percent Change Rank</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="getEarnings()">Standard Deviation Rank</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="getEarnings()">Overall Rank</button>
+			<button onclick="getPercent()">Percent Change Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getDeviation()">Standard Deviation Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getOverall()">Overall Rank</button>
 	</section>
 	<section id="pageContent">
 		<main role="main">
@@ -76,7 +76,6 @@
 
 <script>
 function putChart() {
-
 function parse_query_string(query) {
   var vars = query.split("&");
   var query_string = {};
@@ -96,25 +95,21 @@ function parse_query_string(query) {
   }
   return query_string;
 }
-
 var query = document.getElementById("symbol").value;
 //var qs = parse_query_string(query);
 var sym = query.toUpperCase();
-
 function getQuote(string) {
   var str1 = "https://api.iextrading.com/1.0/stock/";
   var str2 = "/quote";
   var fullString = str1.concat(string, str2);
   return fullString; 
 };
-
 function getLogo(string) {
   var str1 = "https://api.iextrading.com/1.0/stock/";
   var str2 = "/logo";
   var fullString = str1.concat(string, str2);
   return fullString; 
 };
-
 var company, sector, price, change, stockLogo;
 $.ajax({
   url: getQuote(sym),
@@ -127,7 +122,6 @@ $.ajax({
       change = json.change;
   }
 });
-
 $.ajax({
   url: getLogo(sym),
   async: false,
@@ -136,9 +130,9 @@ $.ajax({
       stockLogo = json.url;
   }
 });
-
+var flag = ht.getStock(sym);
+if (flag) {
 document.getElementById("myLogo").innerHTML = company;
-
 document.getElementById("stockSymbol").innerHTML = "Symbol: ";
 document.getElementById("stockSymbol").innerHTML += sym;
 document.getElementById("sector").innerHTML = "Sector: ";
@@ -149,13 +143,10 @@ document.getElementById("change").innerHTML = "Change: ";
 		if (change < 0) document.getElementById("change").innerHTML += "<img src=\"images/down.png\" align=\"middle\">";
 		else if (change > 0) document.getElementById("change").innerHTML += "<img src=\"images/up.png\" align=\"middle\">";
 		else document.getElementById("change").innerHTML += "No Change";
-
-ht.getStock(sym);
 var ctx = document.getElementById('myChart').getContext('2d');
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'line',
-
 					    // The data for our dataset
 					    data: {
 					        labels: ["12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
@@ -166,34 +157,31 @@ var ctx = document.getElementById('myChart').getContext('2d');
 					            data: [singleStock[1], singleStock[2], singleStock[3], singleStock[4], singleStock[5], singleStock[6], singleStock[7], singleStock[8], singleStock[9], singleStock[10], singleStock[11], singleStock[12]],
 					        }]
 					    },
-
     // Configuration options go here
     options: {}
 });
-
 }
-
+else
+	document.getElementById("result").innerHTML = "";
+}
 function getEarnings()
 {
 	ht.BucketsortEarn(5);
-	ht.print();
+	ht.print(17);
 }
-
 function getPercent()
 {
 	ht.percentsort(5);
-	ht.print();
+	ht.print(18);
 }
-
 function getDeviation()
 {
 	ht.BucketsortDev(5);
-	ht.print();
+	ht.print(19);
 }
-
 function getOverall()
 {
 	ht.overallsort(5);
-	ht.print();
+	ht.print(20);
 }
 </script>
