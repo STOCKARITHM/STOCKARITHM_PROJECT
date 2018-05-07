@@ -33,9 +33,9 @@
 		</header>
 	<section>
 			<button onclick="getEarnings()">Earnings Rank</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="getEarnings()">Percent Change Rank</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="getEarnings()">Standard Deviation Rank</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="getEarnings()">Overall Rank</button>
+			<button onclick="getPercent()">Percent Change Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getDeviation()">Standard Deviation Rank</button>&nbsp;&nbsp;&nbsp;
+			<button onclick="getOverall()">Overall Rank</button>
 	</section>
 	<section id="pageContent">
 		<main role="main">
@@ -137,6 +137,8 @@ $.ajax({
   }
 });
 
+var flag = ht.getStock(sym);
+if (flag) {
 document.getElementById("myLogo").innerHTML = company;
 
 document.getElementById("stockSymbol").innerHTML = "Symbol: ";
@@ -150,7 +152,7 @@ document.getElementById("change").innerHTML = "Change: ";
 		else if (change > 0) document.getElementById("change").innerHTML += "<img src=\"images/up.png\" align=\"middle\">";
 		else document.getElementById("change").innerHTML += "No Change";
 
-ht.getStock(sym);
+
 var ctx = document.getElementById('myChart').getContext('2d');
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
@@ -170,12 +172,14 @@ var ctx = document.getElementById('myChart').getContext('2d');
     // Configuration options go here
     options: {}
 });
-
+}
+else
+	document.getElementById("result").innerHTML = "";
 }
 
 function getEarnings()
 {
-	ht.BucketsortEarn(5);
+//	ht.BucketsortEarn(5);
 	ht.print();
 }
 
