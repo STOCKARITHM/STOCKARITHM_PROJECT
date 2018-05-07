@@ -168,8 +168,30 @@ var panzer = 0;
 
   return array;
   }
+function average(array,row){
+  var sum=0;
+  var avg=0;
+  for(var i=1; i<13; i++){
+    sum+=array[row][i];
+  }
+  avg=sum/12;
+  array[row][15]=avg;
+}
 
-
+function standardDeviation(array, row){
+  var Xi=0;
+  var sum=0;
+  for(var i=1; i<13; i++){
+    Xi=array[row][i];
+    sum+=Math.pow(Xi-array[row][15], 2);
+  }
+  var standardDev = Math.sqrt((sum/11));
+  array[row][16]=standardDev;
+}
+for(var i=1; i<500; i++){
+  average(twodim,i);
+ standardDeviatino(twodim,i);
+}
 //sort based on std deviation 
  thisHash.Bucketsort = function(bucketsize)
   {
