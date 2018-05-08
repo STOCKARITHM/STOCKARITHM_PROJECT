@@ -1,4 +1,3 @@
-
 var max = 1000;
 var dimplus =0;
 var dimcounter = 0;
@@ -1097,6 +1096,3 @@ if(devsort == 0)
   }
 
 };
-
-
-
