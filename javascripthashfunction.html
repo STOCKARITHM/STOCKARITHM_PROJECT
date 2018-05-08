@@ -108,15 +108,9 @@ var hash = (string, max) => {
   }
   return hash % max;
 };
-var getChartURL = (string) => {
+var getURL = (string) => {
   var str1 = "https://api.iextrading.com/1.0/stock/";
   var str2 = "/chart/1y";
-  var fullString = str1.concat(string, str2);
-  return fullString; 
-};
-var getEPSURL = (string) => {
-  var str1 = "https://api.iextrading.com/1.0/stock/";
-  var str2 = "/earnings";
   var fullString = str1.concat(string, str2);
   return fullString; 
 };
@@ -161,7 +155,7 @@ function copy(o)
 
 
 
-  thisHash.Bucketsort = function(bucketsize)
+  thisHash.overallsort = function(bucketsize)
   {
     array = copy(twodim);
     //document.write(array);
@@ -172,12 +166,12 @@ function copy(o)
 
   // Declaring vars
   var i,
-      minValue = array[1],
-      maxValue = array[1],
+      minValue = array[20],
+      maxValue = array[20],
       bucketSize = bucketSize || 5;
   
   // Setting min and max values
-  for(var i = 1; i<array.length; i+=13)
+  for(var i = 20; i<array.length; i+=21)
   {
     if(array[i] < minValue)
     {
@@ -200,93 +194,123 @@ function copy(o)
   
   // Pushing values to buckets
   var temper = array.length;
-  for(var i = 1; i<temper; i+=13)
+  for(var i = 20; i<temper; i+=21)
   {
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-20]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-19]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-18]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-17]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-16]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-15]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-14]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-13]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-12]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-11]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-10]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-9]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-8]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-7]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-6]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-5]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-4]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-3]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-2]);
     allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-1]);
     allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+1]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+2]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+3]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+4]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+5]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+6]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+7]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+8]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+9]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+10]);
-    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+11]);
+
+
   }
   // Sorting buckets
   array.length = 0;
 
   for(var k = 0; k<allBuckets.length; k++)
   {
-    if(allBuckets[k].length <13)
+    if(allBuckets[k].length <21)
     {
       continue;
     }
-    for(var i = 1; i<= allBuckets[k].length; i+=13) //asdf
+    for(var i = 20; i<= allBuckets[k].length; i+=21) //asdf
     {
-      var temp1 = allBuckets[k][i-1]; 
-      var temp2 = allBuckets[k][i];
-      var temp3 = allBuckets[k][i+1];
-      var temp4 = allBuckets[k][i+2];
-      var temp5 = allBuckets[k][i+3];
-      var temp6 = allBuckets[k][i+4];
-      var temp7 = allBuckets[k][i+5];
-      var temp8 = allBuckets[k][i+6];
-      var temp9 = allBuckets[k][i+7];
-      var temp10 = allBuckets[k][i+8];
-      var temp11 = allBuckets[k][i+9];
-      var temp12 = allBuckets[k][i+10];
-      var temp13 = allBuckets[k][i+11];
+      var temp1 = allBuckets[k][i-20]; 
+      var temp2 = allBuckets[k][i-19];
+      var temp3 = allBuckets[k][i-18];
+      var temp4 = allBuckets[k][i-17];
+      var temp5 = allBuckets[k][i-16];
+      var temp6 = allBuckets[k][i-15];
+      var temp7 = allBuckets[k][i-14];
+      var temp8 = allBuckets[k][i-13];
+      var temp9 = allBuckets[k][i-12];
+      var temp10 = allBuckets[k][i-11];
+      var temp11 = allBuckets[k][i-10];
+      var temp12 = allBuckets[k][i-9];
+      var temp13 = allBuckets[k][i-8];
+      var temp14 = allBuckets[k][i-7];
+      var temp15 = allBuckets[k][i-6];
+      var temp16 = allBuckets[k][i-5];
+      var temp17 = allBuckets[k][i-4];
+      var temp18 = allBuckets[k][i-3];
+      var temp19 = allBuckets[k][i-2];
+      var temp20 = allBuckets[k][i-1];
+      var temp21 = allBuckets[k][i];
 
-      var j = i-13; //asdf
-      while(j>= 0 && Number(allBuckets[k][j])>Number(temp12))
+      var j = i-20; //asdf
+      while(j>= 0 && Number(allBuckets[k][j])>Number(temp21))
       {     
-        allBuckets[k][j+12] = allBuckets[k][j-1];   
-        allBuckets[k][j+13] = allBuckets[k][j];
-        allBuckets[k][j+14] = allBuckets[k][j+1];
-        allBuckets[k][j+15] = allBuckets[k][j+2];
-        allBuckets[k][j+16] = allBuckets[k][j+3];
-        allBuckets[k][j+17] = allBuckets[k][j+4];
-        allBuckets[k][j+18] = allBuckets[k][j+5];
-        allBuckets[k][j+19] = allBuckets[k][j+6];
-        allBuckets[k][j+20] = allBuckets[k][j+7];
-        allBuckets[k][j+21] = allBuckets[k][j+8];
-        allBuckets[k][j+22] = allBuckets[k][j+9];
-        allBuckets[k][j+23] = allBuckets[k][j+10];
-        allBuckets[k][j+24] = allBuckets[k][j+11];
+        allBuckets[k][j] = allBuckets[k][j-20];   
+        allBuckets[k][j+1] = allBuckets[k][j-19];
+        allBuckets[k][j+2] = allBuckets[k][j-18];
+        allBuckets[k][j+3] = allBuckets[k][j-17];
+        allBuckets[k][j+4] = allBuckets[k][j-16];
+        allBuckets[k][j+5] = allBuckets[k][j-15];
+        allBuckets[k][j+6] = allBuckets[k][j-14];
+        allBuckets[k][j+7] = allBuckets[k][j-13];
+        allBuckets[k][j+8] = allBuckets[k][j-12];
+        allBuckets[k][j+9] = allBuckets[k][j-11];
+        allBuckets[k][j+10] = allBuckets[k][j-10];
+        allBuckets[k][j+11] = allBuckets[k][j-9];
+        allBuckets[k][j+12] = allBuckets[k][j-8];
+        allBuckets[k][j+13] = allBuckets[k][j-7];
+        allBuckets[k][j+14] = allBuckets[k][j-6];
+        allBuckets[k][j+15] = allBuckets[k][j-5];
+        allBuckets[k][j+16] = allBuckets[k][j-4];
+        allBuckets[k][j+17] = allBuckets[k][j-3];
+        allBuckets[k][j+18] = allBuckets[k][j-2];
+        allBuckets[k][j+19] = allBuckets[k][j-1];
+        allBuckets[k][j+20] = allBuckets[k][j];
 
-
-
-        j-=13; //asdf
+        j-=20; //asdf
       }
-      allBuckets[k][j+12] = temp1;
-      allBuckets[k][j+13] = temp2;
-      allBuckets[k][j+14] = temp3;
-      allBuckets[k][j+15] = temp4;
-      allBuckets[k][j+16] = temp5;
-      allBuckets[k][j+17]= temp6;
-      allBuckets[k][j+18]= temp7;
-      allBuckets[k][j+19]= temp8;
-      allBuckets[k][j+20]= temp9;
-      allBuckets[k][j+21]= temp10;
-      allBuckets[k][j+22]= temp11;
-      allBuckets[k][j+23]= temp12;
-      allBuckets[k][j+24]= temp13;
-
+      allBuckets[k][j+1] = temp1;
+      allBuckets[k][j+2] = temp2;
+      allBuckets[k][j+3] = temp3;
+      allBuckets[k][j+4] = temp4;
+      allBuckets[k][j+5] = temp5;
+      allBuckets[k][j+6]= temp6;
+      allBuckets[k][j+7]= temp7;
+      allBuckets[k][j+8]= temp8;
+      allBuckets[k][j+9]= temp9;
+      allBuckets[k][j+10]= temp10;
+      allBuckets[k][j+11]= temp11;
+      allBuckets[k][j+12]= temp12;
+      allBuckets[k][j+13]= temp14;
+      allBuckets[k][j+14]= temp15;
+      allBuckets[k][j+15]= temp16;
+      allBuckets[k][j+16]= temp17;
+      allBuckets[k][j+17]= temp18;
+      allBuckets[k][j+18]= temp19;
+      allBuckets[k][j+19]= temp20;
+      allBuckets[k][j+20]= temp21;
     }
   }
 
 
 
-var panzer = 0;
+var panzer = 0; //counter
   for(var z = 0; z<allBuckets.length; z++)
   {
-    if(allBuckets[z].length > 12)
+    if(allBuckets[z].length > 20)
     {
-      let boop = new Array();
+      let boop = new Array(); //array to be put into array
 
       boop.push(allBuckets[z]);
       array[panzer] = boop;
@@ -300,13 +324,213 @@ var panzer = 0;
       document.write(array[i]);
       document.write("<br>");
     }
-
   }
-
-
-
   return array;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  thisHash.percentsort = function(bucketsize)
+  {
+    array = copy(twodim);
+    //document.write(array);
+    if (array.length === 0) 
+    {
+    return array;
+    }
+
+  // Declaring vars
+  var i,
+      minValue = array[14],
+      maxValue = array[14],
+      bucketSize = bucketSize || 5;
+  
+  // Setting min and max values
+  for(var i = 14; i<array.length; i+=21)
+  {
+    if(array[i] < minValue)
+    {
+      minValue = array[i];
+    }
+    else if(array[i] > maxValue)
+    {
+      maxValue = array[i];
+    }
+  }
+
+  // Initializing buckets
+  var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+  var allBuckets = new Array(bucketCount);
+  
+  for (i = 0; i < allBuckets.length; i++)
+  {
+    allBuckets[i] = [];
+  }
+  
+  // Pushing values to buckets
+  var temper = array.length;
+  for(var i = 14; i<temper; i+=21)
+  {
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-14]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-13]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-12]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-11]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-10]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-9]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-8]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-7]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-6]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-5]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-4]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-3]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-2]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i-1]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+1]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+2]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+3]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+4]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+5]);
+    allBuckets[Math.floor((array[i] - minValue)/bucketSize)].push(array[i+6]);
+
+
+  }
+  // Sorting buckets
+  array.length = 0;
+
+  for(var k = 0; k<allBuckets.length; k++)
+  {
+    if(allBuckets[k].length <21)
+    {
+      continue;
+    }
+    for(var i = 14; i<= allBuckets[k].length; i+=21) //asdf
+    {
+      var temp1 = allBuckets[k][i-14]; 
+      var temp2 = allBuckets[k][i-13];
+      var temp3 = allBuckets[k][i-12];
+      var temp4 = allBuckets[k][i-11];
+      var temp5 = allBuckets[k][i-10];
+      var temp6 = allBuckets[k][i-9];
+      var temp7 = allBuckets[k][i-8];
+      var temp8 = allBuckets[k][i-7];
+      var temp9 = allBuckets[k][i-6];
+      var temp10 = allBuckets[k][i-5];
+      var temp11 = allBuckets[k][i-4];
+      var temp12 = allBuckets[k][i-3];
+      var temp13 = allBuckets[k][i-2];
+      var temp14 = allBuckets[k][i-1];
+      var temp15 = allBuckets[k][i];
+      var temp16 = allBuckets[k][i+1];
+      var temp17 = allBuckets[k][i+2];
+      var temp18 = allBuckets[k][i+3];
+      var temp19 = allBuckets[k][i+4];
+      var temp20 = allBuckets[k][i+5];
+      var temp21 = allBuckets[k][i+6];
+
+      var j = i-20; //asdf
+      while(j>= 0 && Number(allBuckets[k][j])>Number(temp15))
+      {     
+        allBuckets[k][j+6] = allBuckets[k][j-14];   
+        allBuckets[k][j+7] = allBuckets[k][j-13];
+        allBuckets[k][j+8] = allBuckets[k][j-12];
+        allBuckets[k][j+9] = allBuckets[k][j-11];
+        allBuckets[k][j+10] = allBuckets[k][j-10];
+        allBuckets[k][j+11] = allBuckets[k][j-9];
+        allBuckets[k][j+12] = allBuckets[k][j-8];
+        allBuckets[k][j+13] = allBuckets[k][j-7];
+        allBuckets[k][j+14] = allBuckets[k][j-6];
+        allBuckets[k][j+15] = allBuckets[k][j-5];
+        allBuckets[k][j+16] = allBuckets[k][j-4];
+        allBuckets[k][j+17] = allBuckets[k][j-3];
+        allBuckets[k][j+18] = allBuckets[k][j-2];
+        allBuckets[k][j+19] = allBuckets[k][j-1];
+        allBuckets[k][j+20] = allBuckets[k][j];
+        allBuckets[k][j+21] = allBuckets[k][j+1];
+        allBuckets[k][j+22] = allBuckets[k][j+2];
+        allBuckets[k][j+23] = allBuckets[k][j+3];
+        allBuckets[k][j+24] = allBuckets[k][j+4];
+        allBuckets[k][j+25] = allBuckets[k][j+5];
+        allBuckets[k][j+26] = allBuckets[k][j+6];
+
+        j-=20; //asdf
+      }
+      allBuckets[k][j+7] = temp1;
+      allBuckets[k][j+8] = temp2;
+      allBuckets[k][j+9] = temp3;
+      allBuckets[k][j+10] = temp4;
+      allBuckets[k][j+11] = temp5;
+      allBuckets[k][j+12]= temp6;
+      allBuckets[k][j+13]= temp7;
+      allBuckets[k][j+14]= temp8;
+      allBuckets[k][j+15]= temp9;
+      allBuckets[k][j+16]= temp10;
+      allBuckets[k][j+17]= temp11;
+      allBuckets[k][j+18]= temp12;
+      allBuckets[k][j+19]= temp14;
+      allBuckets[k][j+20]= temp15;
+      allBuckets[k][j+21]= temp16;
+      allBuckets[k][j+22]= temp17;
+      allBuckets[k][j+23]= temp18;
+      allBuckets[k][j+24]= temp19;
+      allBuckets[k][j+25]= temp20;
+      allBuckets[k][j+26]= temp21;
+    }
+  }
+
+
+
+var panzer = 0; //counter
+  for(var z = 0; z<allBuckets.length; z++)
+  {
+    if(allBuckets[z].length > 20)
+    {
+      let boop = new Array(); //array to be put into array
+
+      boop.push(allBuckets[z]);
+      array[panzer] = boop;
+      panzer ++;
+    }
+  }
+
+
+var counter = 1;
+for(int i =0; i<500; i++)
+{
+  array[i][18] = counter;
+  array[i][20]+= counter;
+  counter++;
+
+}
+
+  
+twodim = copy(array);
+
+
+  }
+
+
+
+
 
 
 
@@ -319,19 +543,23 @@ var panzer = 0;
       document.write("<br>");
        if(storage[i]!=undefined)
         {
-       //document.write(storage[i]);
-       //document.write("<br>");
+       // document.write(storage[i]);
+        //document.write("<br>");
         }
     }
    }
+
+
+
+
+
 //adds the stock symbol and value to hash table, will need to be altered for more datapoints per symbol
 
   thisHash.add = function(key) {  
-  var value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13;
+  var value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12;
   dimcounter = 0;
-  //Grab and assign chart prices
   $.ajax({
-  url: getChartURL(key),
+  url: getURL(key),
   async: false,
   dataType: 'json',
   success: function (json) {
@@ -347,17 +575,8 @@ var panzer = 0;
     value9 = json[8*n].close;
     value10 = json[9*n].close;
     value11 = json[10*n].close;
-    value12 = json[json.length - 1].close;    
-  }
-});
-  //Grab and assign EPS
-  $.ajax({
-  url: getEPSURL(key),
-  async: false,
-  dataType: 'json',
-  success: function (json) {
-  value13 = json.earnings[0].actualEPS;  
-  let onedim = new Array();
+    value12 = json[json.length - 1].close;  
+    let onedim = new Array();
     onedim[dimcounter] = key;
     dimcounter++;
     onedim[dimcounter] = value1;
@@ -384,36 +603,21 @@ var panzer = 0;
     dimcounter ++;
     onedim[dimcounter] = value12;
     dimcounter ++;
-    onedim[dimcounter] = value13;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
-    onedim[dimcounter] = 0;
-    dimcounter ++;
+
     twodim[dimplus] = onedim;
     dimplus ++;
+
+
+
+
 
   }
 });
 
-
-
     var index = hash(key, max);
     if (storage[index] === undefined) {
       storage[index] = [
-        [key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13]
+        [key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12]
       ];
     } else {
       var inserted = false;
@@ -431,12 +635,11 @@ var panzer = 0;
           storage[index][i][10] = value10;
           storage[index][i][11] = value11;
           storage[index][i][12] = value12;
-          storage[index][i][13] = value13;
           inserted = true;
         }
       }
       if (inserted === false) {
-        storage[index].push([key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13]);
+        storage[index].push([key, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12]);
       }
     }
   };
@@ -465,12 +668,14 @@ var panzer = 0;
     {
       for(var i=0; i<storage[index].length; i++)
       {
-        if (storage[index][i][0] === key)
-        {
-          document.write(storage[index][i][0]);
-          document.write(" ");
-          document.write(storage[index][i][1]);
-        }
+
+        
+        // if (storage[index][i][0] === key)
+        // {
+        //   document.write(storage[index][i][0]);
+        //   document.write(" ");
+        //   document.write(storage[index][i][1]);
+        // }
       }
     }
   }
@@ -524,10 +729,10 @@ let ht = new HashTable();
         <script language="JavaScript">
                   
                   //prints whole hash
-                  ht.print();
-                  //ht.Bucketsort(5);
+                  //ht.print();
+                  ht.overallsort(5);
                   //prints just info of stock "KEY"
-                  //ht.printinfo("GOOG");
+                  //ht.printinfo("KEY");
         </script>
 
       </div>

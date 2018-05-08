@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -40,7 +43,7 @@
 	<section id="pageContent">
 		<main role="main">
 			<article>
-			<div id="result">
+			<div id="result"></div>
 				<table>
 				<tr><td><div id="myLogo"></div></td></tr>
 				<tr valign="middle"><td>
@@ -98,6 +101,10 @@ function parse_query_string(query) {
 var query = document.getElementById("symbol").value;
 //var qs = parse_query_string(query);
 var sym = query.toUpperCase();
+if(ht.getStock(sym)!= 1){
+       window.alert("Stock symbol is invalid");
+	return 0;
+}
 function getQuote(string) {
   var str1 = "https://api.iextrading.com/1.0/stock/";
   var str2 = "/quote";
@@ -130,8 +137,9 @@ $.ajax({
       stockLogo = json.url;
   }
 });
-var flag = ht.getStock(sym);
-if (flag) {
+
+if (1) {
+document.getElementById("result").innerHTML = "";
 document.getElementById("myLogo").innerHTML = company;
 document.getElementById("stockSymbol").innerHTML = "Symbol: ";
 document.getElementById("stockSymbol").innerHTML += sym;
@@ -139,7 +147,7 @@ document.getElementById("sector").innerHTML = "Sector: ";
 document.getElementById("sector").innerHTML += sector;
 document.getElementById("price").innerHTML = "Price: ";
 document.getElementById("price").innerHTML += price;
-document.getElementById("change").innerHTML = "Change: ";
+document.getElementById("change").innerHTML = "Daily Change: ";
 		if (change < 0) document.getElementById("change").innerHTML += "<img src=\"images/down.png\" align=\"middle\">";
 		else if (change > 0) document.getElementById("change").innerHTML += "<img src=\"images/up.png\" align=\"middle\">";
 		else document.getElementById("change").innerHTML += "No Change";
@@ -161,27 +169,49 @@ var ctx = document.getElementById('myChart').getContext('2d');
     options: {}
 });
 }
-else
-	document.getElementById("result").innerHTML = "";
 }
+var done1 = 0;
+var done2 = 0;
+var done3 = 0;
 function getEarnings()
 {
+	done1 = 1;
 	ht.BucketsortEarn(5);
 	ht.print(17);
 }
 function getPercent()
 {
+	done2 = 1;
 	ht.percentsort(5);
 	ht.print(18);
 }
 function getDeviation()
 {
+	done3 = 1;
 	ht.BucketsortDev(5);
 	ht.print(19);
 }
 function getOverall()
 {
+	
+	if(done1 == 0)
+	{
+	ht.BucketsortEarn(5);
+	done1 = 1;	
+	}
+	if(done2 ==0)
+	{
+	done2 = 1;
+	ht.percentsort(5);
+	}
+	if(done3 ==0)
+	{
+	ht.BucketsortDev(5);
+	done3 =1;	
+	}
+	
 	ht.overallsort(5);
 	ht.print(20);
 }
 </script>
+
