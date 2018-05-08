@@ -1,3 +1,4 @@
+
 var max = 1000;
 var dimplus =0;
 var dimcounter = 0;
@@ -63,6 +64,18 @@ function copy(o)
 
       //this function needs to be changed/have several versions to benefit us
   thisHash.print = function(rank) {
+
+
+
+
+
+
+    for(var y= 0; y<storage.length; y++)
+    {
+            document.getElementById("result").innerHTML =("yyet");
+
+      document.getElementById("result").innerHTML = storage[i];
+    }
             document.getElementById("result").innerHTML = "";
 if(rank == 20)
 {
@@ -258,12 +271,14 @@ if(rank == 20)
   thisHash.getStock = function(key)
   {
     var index = hash(key,max);
-    if(storage[index]===undefined)
-    {
-    document.write("no symbol match");  
-  }
-    else
-    {
+    // if(storage[index][0]!= key.toUppercase())
+    // {
+    //   window.alert("Stock symbol is invalid");
+    //   return 0;
+    // }
+    // else
+    // {
+      
       for(var i=0; i<storage[index].length; i++)
       {
         if (storage[index][i][0] === key)
@@ -273,8 +288,10 @@ if(rank == 20)
               singleStock[j] = storage[index][i][j];
           }
         }
+        
       }
-    }
+      return 1;
+    
   }
   //returns the value of the stock ($)
   thisHash.lookup = function(key) {
@@ -657,6 +674,7 @@ var panzer = 0;
 var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
+ 
     let boop = new Array();
     if(allBuckets[z].length > 12)
     {
@@ -847,7 +865,8 @@ var sortearn = 0;
 var panzer = 0;
 var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
-  {
+  {  
+   
     let boop = new Array();
     if(allBuckets[z].length > 12)
     {
@@ -1041,6 +1060,7 @@ var panzer = 0;
 var punto = 0;
   for(var z = 0; z<allBuckets.length; z++)
   {
+  
     let boop = new Array();
     if(allBuckets[z].length > 12)
     {
@@ -1077,3 +1097,6 @@ if(devsort == 0)
   }
 
 };
+
+
+
