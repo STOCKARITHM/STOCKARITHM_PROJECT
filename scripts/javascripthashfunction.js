@@ -1,6 +1,7 @@
 var max = 1000;
 var dimplus =0;
 var dimcounter = 0;
+var valid;
 let singleStock = new Array();
 var hash = (string, max) => {
   var hash = 0;
@@ -63,6 +64,12 @@ function copy(o)
 
       //this function needs to be changed/have several versions to benefit us
   thisHash.print = function(rank) {
+            document.getElementById("myLogo").innerHTML = "";
+            document.getElementById("stockSymbol").innerHTML = "";
+            document.getElementById("sector").innerHTML = "";
+            document.getElementById("price").innerHTML = "";
+            document.getElementById("change").innerHTML = "";
+            document.getElementById("myChart").innerHTML = "";
             document.getElementById("result").innerHTML = "";
 if(rank == 20)
 {
@@ -260,7 +267,8 @@ if(rank == 20)
     var index = hash(key,max);
     if(storage[index]===undefined)
     {
-    document.write("no symbol match");  
+    window.alert("Stock is invalid");
+    valid = 0;  
   }
     else
     {
@@ -274,6 +282,7 @@ if(rank == 20)
           }
         }
       }
+      valid = 1;
     }
   }
   //returns the value of the stock ($)

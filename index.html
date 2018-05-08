@@ -40,7 +40,7 @@
 	<section id="pageContent">
 		<main role="main">
 			<article>
-			<div id="result">
+			<div id="result"></div>
 				<table>
 				<tr><td><div id="myLogo"></div></td></tr>
 				<tr valign="middle"><td>
@@ -98,6 +98,7 @@ function parse_query_string(query) {
 var query = document.getElementById("symbol").value;
 //var qs = parse_query_string(query);
 var sym = query.toUpperCase();
+ht.getStock(sym);
 function getQuote(string) {
   var str1 = "https://api.iextrading.com/1.0/stock/";
   var str2 = "/quote";
@@ -130,8 +131,9 @@ $.ajax({
       stockLogo = json.url;
   }
 });
-var flag = ht.getStock(sym);
-if (flag) {
+
+if (valid) {
+document.getElementById("result").innerHTML = "";
 document.getElementById("myLogo").innerHTML = company;
 document.getElementById("stockSymbol").innerHTML = "Symbol: ";
 document.getElementById("stockSymbol").innerHTML += sym;
@@ -161,8 +163,6 @@ var ctx = document.getElementById('myChart').getContext('2d');
     options: {}
 });
 }
-else
-	document.getElementById("result").innerHTML = "";
 }
 function getEarnings()
 {
