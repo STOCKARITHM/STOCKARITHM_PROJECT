@@ -1006,7 +1006,7 @@ var devsort = 0;
       var temp21 = allBuckets[k][i+4];
 
 
-      var j = i-21; //asdf
+      var j = i-21; 
       while(j>= 0 && Number(allBuckets[k][j])>Number(temp17))
       {     
         allBuckets[k][j+5] = allBuckets[k][j-16];   
